@@ -1,0 +1,2 @@
+extensions:
+	staticPage: Baraja\StaticPage\StaticPageExtension
