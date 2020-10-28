@@ -27,53 +27,32 @@ class StaticPage
 	use Identifier;
 	use TranslateObject;
 
-	/**
-	 * @var Translation
-	 * @ORM\Column(type="translate")
-	 */
-	private $title;
+	/** @ORM\Column(type="translate") */
+	private Translation $title;
 
-	/**
-	 * @var string
-	 * @ORM\Column(type="string", length=64, unique=true)
-	 */
-	private $slug;
+	/** @ORM\Column(type="string", length=64, unique=true) */
+	private string $slug;
 
-	/**
-	 * @var Translation
-	 * @ORM\Column(type="translate")
-	 */
-	private $content;
+	/** @ORM\Column(type="translate") */
+	private Translation $content;
 
-	/**
-	 * @var self|null
-	 * @ORM\ManyToOne(targetEntity="StaticPage", inversedBy="children")
-	 */
-	private $parent;
+	/** @ORM\Column(type="boolean") */
+	private bool $active = true;
+
+	/** @ORM\Column(type="datetime") */
+	private \DateTime $updatedDate;
+
+	/** @ORM\Column(type="datetime") */
+	private \DateTime $insertedDate;
+
+	/** @ORM\ManyToOne(targetEntity="StaticPage", inversedBy="children") */
+	private ?self $parent;
 
 	/**
 	 * @var self[]|Collection
 	 * @ORM\OneToMany(targetEntity="StaticPage", mappedBy="parent")
 	 */
 	private $children;
-
-	/**
-	 * @var bool
-	 * @ORM\Column(type="boolean")
-	 */
-	private $active = true;
-
-	/**
-	 * @var \DateTime
-	 * @ORM\Column(type="datetime")
-	 */
-	private $updatedDate;
-
-	/**
-	 * @var \DateTime
-	 * @ORM\Column(type="datetime")
-	 */
-	private $insertedDate;
 
 
 	public function __construct(string $title, string $content = '', ?string $slug = null, ?self $parent = null)

@@ -22,12 +22,13 @@ use Tracy\ILogger;
 
 final class StaticPageEndpoint extends BaseEndpoint
 {
+	private EntityManager $entityManager;
 
-	/**
-	 * @var EntityManager
-	 * @inject
-	 */
-	public $entityManager;
+
+	public function __construct(EntityManager $entityManager)
+	{
+		$this->entityManager = $entityManager;
+	}
 
 
 	/**
