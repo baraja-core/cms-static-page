@@ -25,9 +25,8 @@ final class StaticPageExtension extends CompilerExtension
 
 	public function beforeCompile(): void
 	{
-		OrmAnnotationsExtension::addAnnotationPath('Baraja\StaticPage\Entity', __DIR__ . '/Entity');
-
 		$builder = $this->getContainerBuilder();
+		OrmAnnotationsExtension::addAnnotationPathToManager($builder, 'Baraja\StaticPage\Entity', __DIR__ . '/Entity');
 
 		$builder->addDefinition($this->prefix('staticPageManager'))
 			->setFactory(StaticPageManager::class);
