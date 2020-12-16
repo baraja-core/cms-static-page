@@ -125,14 +125,15 @@ final class StaticPageEndpoint extends BaseEndpoint
 			return;
 		}
 
+		$parent = $staticPage->getParent();
 		$this->sendJson([
 			'item' => [
 				'id' => $staticPage->getId(),
 				'title' => $staticPage->getTitle(),
 				'content' => $staticPage->getContent(),
-				'parent' => $staticPage->getParent() ? [
-					'id' => $staticPage->getParent()->getId(),
-					'title' => $staticPage->getParent()->getTitle(),
+				'parent' => $parent !== null ? [
+					'id' => $parent->getId(),
+					'title' => $parent->getTitle(),
 				] : null,
 
 				'active' => $staticPage->isActive(),
