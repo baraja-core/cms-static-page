@@ -12,7 +12,7 @@
 		"php": ">=7.4.0",
 		"nette/utils": "^3.0",
 		"nette/di": "^3.0",
-		"baraja-core/doctrine": "^2.0",
+		"baraja-core/doctrine": "^2.4",
 		"baraja-core/localization": "^1.0",
 		"baraja-core/structured-api": "^2.0",
 		"baraja-core/markdown-latte-filter": "^1.0",
