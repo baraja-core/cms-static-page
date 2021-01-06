@@ -7,6 +7,7 @@ namespace Baraja\StaticPage;
 
 use Baraja\Doctrine\EntityManager;
 use Baraja\Localization\Translation;
+use Baraja\SelectboxTree\SelectboxItem;
 use Baraja\SelectboxTree\SelectboxTree;
 use Baraja\StaticPage\Entity\StaticPage;
 use Baraja\StructuredApi\BaseEndpoint;
@@ -209,13 +210,16 @@ final class StaticPageEndpoint extends BaseEndpoint
 			$data = [];
 		}
 
-		$this->sendJson($this->formatBootstrapSelectArray($tree->process(array_map(static function (array $item) {
-			$item['name'] = $item['title'];
+		$items = [];
+		foreach ($data as $item) {
+			$items[] = new SelectboxItem(
+				(int) $item['id'],
+				(string) new Translation($item['title']),
+				$item['parent_id'] ? (int) $item['parent_id'] : null
+			);
+		}
 
-			return $item;
-		}, $data), static function ($name): string {
-			return (string) new Translation($name);
-		})));
+		$this->sendJson($this->formatBootstrapSelectArray($tree->process($items)));
 	}
 
 
