@@ -34,7 +34,7 @@ final class StaticPagePlugin extends BasePlugin
 
 	public function getIcon(): ?string
 	{
-		return 'fa fa-file';
+		return 'file-text';
 	}
 
 
