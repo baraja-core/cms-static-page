@@ -17,7 +17,7 @@
 		"baraja-core/structured-api": "^2.4",
 		"baraja-core/markdown-latte-filter": "^2.0",
 		"baraja-core/plugin-system": "^1.0",
-		"baraja-core/selectbox-tree": "^2.0"
+		"baraja-core/selectbox-tree": "^1.1 || ^2.0"
 	},
 	"require-dev": {
 		"phpstan/phpstan": "^0.12.18",
