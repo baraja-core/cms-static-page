@@ -201,7 +201,7 @@ final class StaticPageEndpoint extends BaseEndpoint
 
 		try {
 			$data = $this->entityManager->getConnection()->executeQuery(
-				$tree->sqlBuilder($table, 'title', 'parent_id')
+				$tree->sqlBuilder($table, 'title', 'parent_id'),
 			)->fetchAll();
 		} catch (DBALException $e) {
 			if (\class_exists('\Tracy\Debugger') === true) {
@@ -215,7 +215,7 @@ final class StaticPageEndpoint extends BaseEndpoint
 			$items[] = new SelectboxItem(
 				(int) $item['id'],
 				(string) new Translation($item['title']),
-				$item['parent_id'] ? (int) $item['parent_id'] : null
+				$item['parent_id'] ? (int) $item['parent_id'] : null,
 			);
 		}
 
@@ -248,9 +248,7 @@ final class StaticPageEndpoint extends BaseEndpoint
 			->leftJoin('staticPage.parent', 'parent')
 			->select('PARTIAL staticPage.{id}, PARTIAL parent.{id}')
 			->where('staticPage.parent IN (:ids)')
-			->setParameter('ids', $ids = array_map(static function (array $item): string {
-				return (string) $item['id'];
-			}, $staticPages))
+			->setParameter('ids', $ids = array_map(static fn (array $item): string => (string) $item['id'], $staticPages))
 			->getQuery()
 			->getArrayResult();
 
