@@ -12,7 +12,7 @@ Vue.component('static-page-default', {
 				<th class="col-3 col-lg-2">Actions</th>
 			</thead>
 			<div v-if="staticPages.length > 0">
-				<static-page 
+				<static-page
 					v-for="(page, offset) in staticPages"
 					:key="page.id"
 					:offset="offset" 
