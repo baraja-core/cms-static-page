@@ -91,6 +91,18 @@ class StaticPage
 	}
 
 
+	public function legacySetContent(Translation $content): void
+	{
+		$this->content = $content;
+	}
+
+
+	public function legacyGetContent(): Translation
+	{
+		return $this->content;
+	}
+
+
 	public function getParent(): ?self
 	{
 		return $this->parent;
