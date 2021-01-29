@@ -15,14 +15,14 @@ Vue.component('static-page-default', {
 				<static-page
 					v-for="(page, offset) in staticPages"
 					:key="page.id"
-					:offset="offset" 
+					:offset="offset"
 					:nice-name="page.title"
 					:children-count="staticPages.length"
-					:page="page" 
+					:page="page"
 					:list="staticPagesInstances"
 					:level="0"
 					:current-page-id="page.id"
-					:parent-id="null" 
+					:parent-id="null"
 					@refresh="sync"
 				></static-page>
 			</div>
@@ -188,7 +188,6 @@ Vue.component('static-page', {
 	}
 });
 
-
 Vue.component('modal-static-create', {
 	props: ['selectbox'],
 	template: `<b-modal id="modal-static-create" title="Create new static page" @shown="loadParents()" hide-footer>
@@ -261,7 +260,6 @@ Vue.component('modal-static-create', {
 							title: '',
 							parentId: null,
 						}
-
 					})
 					.finally(() => this.isCreating = false)
 			} else {
