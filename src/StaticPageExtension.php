@@ -13,7 +13,6 @@ use Nette\DI\Definitions\ServiceDefinition;
 
 final class StaticPageExtension extends CompilerExtension
 {
-
 	/**
 	 * @return string[]
 	 */
