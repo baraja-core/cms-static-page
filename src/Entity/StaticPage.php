@@ -52,7 +52,7 @@ class StaticPage
 	 * @var self[]|Collection
 	 * @ORM\OneToMany(targetEntity="StaticPage", mappedBy="parent")
 	 */
-	private $children;
+	private array|Collection $children;
 
 
 	public function __construct(string $title, string $content = '', ?string $slug = null, ?self $parent = null)
@@ -132,7 +132,7 @@ class StaticPage
 	/**
 	 * @return StaticPage[]|Collection
 	 */
-	public function getChildren()
+	public function getChildren(): array|Collection
 	{
 		return $this->children;
 	}

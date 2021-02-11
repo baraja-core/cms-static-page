@@ -22,11 +22,10 @@ final class StaticPageManager
 
 
 	/**
-	 * @param int|string|mixed $identifier id or slug
 	 * @return StaticPage
 	 * @throws NoResultException|NonUniqueResultException
 	 */
-	public function get($identifier): StaticPage
+	public function get(int|string $identifier): StaticPage
 	{
 		$selection = $this->entityManager->getRepository(StaticPage::class)
 			->createQueryBuilder('staticPage')
@@ -35,11 +34,9 @@ final class StaticPageManager
 		if (\is_int($identifier)) {
 			$selection->andWhere('staticPage.id = :id')
 				->setParameter('id', $identifier);
-		} elseif (\is_string($identifier)) {
+		} else {
 			$selection->andWhere('staticPage.slug = :slug')
 				->setParameter('slug', $identifier);
-		} else {
-			throw new \InvalidArgumentException('Identifier must be integer for ID or string for slug, but type "' . \gettype($identifier) . '" given.');
 		}
 
 		return $selection->getQuery()->getSingleResult();
