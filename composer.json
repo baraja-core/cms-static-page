@@ -10,14 +10,14 @@
 	],
 	"require": {
 		"php": "^8.0",
-		"nette/utils": "^3.0",
+		"nette/utils": "^3.2",
 		"nette/di": "^3.0",
-		"baraja-core/doctrine": "^2.4",
-		"baraja-core/localization": "^1.0",
-		"baraja-core/structured-api": "^2.4",
-		"baraja-core/markdown-latte-filter": "^2.0",
-		"baraja-core/plugin-system": "^1.0",
-		"baraja-core/selectbox-tree": "^1.1 || ^2.0"
+		"baraja-core/doctrine": "^3.0",
+		"baraja-core/localization": "^2.0",
+		"baraja-core/structured-api": "^3.0",
+		"baraja-core/markdown-latte-filter": "^3.0",
+		"baraja-core/plugin-system": "^2.0",
+		"baraja-core/selectbox-tree": "^2.1"
 	},
 	"require-dev": {
 		"phpstan/phpstan": "^0.12.74",
