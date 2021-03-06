@@ -12,12 +12,9 @@ use Doctrine\ORM\NoResultException;
 
 final class StaticPageManager
 {
-	private EntityManager $entityManager;
-
-
-	public function __construct(EntityManager $entityManager)
-	{
-		$this->entityManager = $entityManager;
+	public function __construct(
+		private EntityManager $entityManager
+	) {
 	}
 
 
