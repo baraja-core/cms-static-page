@@ -248,7 +248,7 @@ final class StaticPageEndpoint extends BaseEndpoint
 			->leftJoin('staticPage.parent', 'parent')
 			->select('PARTIAL staticPage.{id}, PARTIAL parent.{id}')
 			->where('staticPage.parent IN (:ids)')
-			->setParameter('ids', $ids = array_map(static fn (array $item): string => (string) $item['id'], $staticPages))
+			->setParameter('ids', $ids = array_map(static fn(array $item): string => (string) $item['id'], $staticPages))
 			->getQuery()
 			->getArrayResult();
 
