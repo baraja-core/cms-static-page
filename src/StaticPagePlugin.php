@@ -11,12 +11,9 @@ use Baraja\StaticPage\Entity\StaticPage;
 
 final class StaticPagePlugin extends BasePlugin
 {
-	private EntityManager $entityManager;
-
-
-	public function __construct(EntityManager $entityManager)
-	{
-		$this->entityManager = $entityManager;
+	public function __construct(
+		private EntityManager $entityManager
+	) {
 	}
 
 
