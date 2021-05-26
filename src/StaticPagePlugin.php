@@ -12,7 +12,7 @@ use Baraja\StaticPage\Entity\StaticPage;
 final class StaticPagePlugin extends BasePlugin
 {
 	public function __construct(
-		private EntityManager $entityManager
+		private EntityManager $entityManager,
 	) {
 	}
 
@@ -49,8 +49,6 @@ final class StaticPagePlugin extends BasePlugin
 
 		if ($staticPage === []) {
 			$this->error('Static page does not exist.');
-
-			return;
 		}
 
 		$this->setTitle((string) ($staticPage[0]['title'] ?? ''));
