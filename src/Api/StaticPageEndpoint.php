@@ -154,6 +154,7 @@ final class StaticPageEndpoint extends BaseEndpoint
 					->getQuery()
 					->getSingleResult();
 			} catch (NoResultException | NonUniqueResultException) {
+				// Silence is golden.
 			}
 		}
 
