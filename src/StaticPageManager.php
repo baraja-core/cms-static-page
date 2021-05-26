@@ -19,7 +19,6 @@ final class StaticPageManager
 
 
 	/**
-	 * @return StaticPage
 	 * @throws NoResultException|NonUniqueResultException
 	 */
 	public function get(int|string $identifier): StaticPage

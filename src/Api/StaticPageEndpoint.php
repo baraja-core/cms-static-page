@@ -24,7 +24,7 @@ use Tracy\ILogger;
 final class StaticPageEndpoint extends BaseEndpoint
 {
 	public function __construct(
-		private EntityManager $entityManager
+		private EntityManager $entityManager,
 	) {
 	}
 
@@ -95,17 +95,16 @@ final class StaticPageEndpoint extends BaseEndpoint
 					->setMaxResults(1)
 					->getQuery()
 					->getSingleResult();
-			} catch (NoResultException | NonUniqueResultException $e) {
+			} catch (NoResultException | NonUniqueResultException) {
 				$this->sendError('Parent page "' . $parentId . '" does not exist.');
-
-				return;
 			}
 		} else {
 			$parent = null;
 		}
 
 		$staticPage = new StaticPage($title, '', $slug, $parent);
-		$this->entityManager->persist($staticPage)->flush($staticPage);
+		$this->entityManager->persist($staticPage);
+		$this->entityManager->flush($staticPage);
 
 		$this->sendOk([
 			'id' => $staticPage->getId(),
@@ -117,10 +116,8 @@ final class StaticPageEndpoint extends BaseEndpoint
 	{
 		try {
 			$staticPage = $this->getStaticPageById($id);
-		} catch (NonUniqueResultException | NoResultException $e) {
+		} catch (NonUniqueResultException | NoResultException) {
 			$this->sendError('Static page "' . $id . '" does not exist.');
-
-			return;
 		}
 
 		$parent = $staticPage->getParent();
@@ -133,7 +130,6 @@ final class StaticPageEndpoint extends BaseEndpoint
 					'id' => $parent->getId(),
 					'title' => $parent->getTitle(),
 				] : null,
-
 				'active' => $staticPage->isActive(),
 			],
 		]);
@@ -144,10 +140,8 @@ final class StaticPageEndpoint extends BaseEndpoint
 	{
 		try {
 			$staticPage = $this->getStaticPageById($id);
-		} catch (NoResultException | NonUniqueResultException $e) {
+		} catch (NoResultException | NonUniqueResultException) {
 			$this->sendError('Static page "' . $id . '" does not exist.');
-
-			return;
 		}
 
 		$parent = null;
@@ -159,7 +153,7 @@ final class StaticPageEndpoint extends BaseEndpoint
 					->setParameter('parentId', $parentId)
 					->getQuery()
 					->getSingleResult();
-			} catch (NoResultException | NonUniqueResultException $e) {
+			} catch (NoResultException | NonUniqueResultException) {
 			}
 		}
 
@@ -175,11 +169,12 @@ final class StaticPageEndpoint extends BaseEndpoint
 
 	public function actionCheckUniqueSlug(string $slug): void
 	{
+		$slug = Strings::webalize($slug);
 		$page = $this->entityManager->getRepository(StaticPage::class)
 			->createQueryBuilder('staticPage')
 			->select('PARTIAL staticPage.{id}')
 			->where('staticPage.slug = :slug')
-			->setParameter('slug', $slug = Strings::webalize($slug))
+			->setParameter('slug', $slug)
 			->setMaxResults(1)
 			->getQuery()
 			->getArrayResult();
@@ -245,7 +240,7 @@ final class StaticPageEndpoint extends BaseEndpoint
 			->leftJoin('staticPage.parent', 'parent')
 			->select('PARTIAL staticPage.{id}, PARTIAL parent.{id}')
 			->where('staticPage.parent IN (:ids)')
-			->setParameter('ids', $ids = array_map(static fn(array $item): string => (string) $item['id'], $staticPages))
+			->setParameter('ids', array_map(static fn(array $item): string => (string) $item['id'], $staticPages))
 			->getQuery()
 			->getArrayResult();
 

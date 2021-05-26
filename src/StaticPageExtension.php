@@ -25,31 +25,47 @@ final class StaticPageExtension extends CompilerExtension
 	public function beforeCompile(): void
 	{
 		$builder = $this->getContainerBuilder();
-		OrmAnnotationsExtension::addAnnotationPathToManager($builder, 'Baraja\StaticPage\Entity', __DIR__ . '/Entity');
+		OrmAnnotationsExtension::addAnnotationPathToManager(
+			$builder,
+			'Baraja\StaticPage\Entity',
+			__DIR__ . '/Entity',
+		);
 
 		$builder->addDefinition($this->prefix('staticPageManager'))
 			->setFactory(StaticPageManager::class);
 
 		/** @var ServiceDefinition $pluginManager */
 		$pluginManager = $builder->getDefinitionByType(PluginManager::class);
-		$pluginManager->addSetup('?->addComponent(?)', ['@self', [
-			'key' => 'staticPageDefault',
-			'name' => 'static-page-default',
-			'implements' => StaticPagePlugin::class,
-			'componentClass' => VueComponent::class,
-			'view' => 'default',
-			'source' => __DIR__ . '/../template/default.js',
-		]]);
-		$pluginManager->addSetup('?->addComponent(?)', ['@self', [
-			'key' => 'staticPageDetail',
-			'name' => 'static-page-detail',
-			'implements' => StaticPagePlugin::class,
-			'componentClass' => VueComponent::class,
-			'view' => 'detail',
-			'source' => __DIR__ . '/../template/detail.js',
-			'position' => 100,
-			'tab' => 'Static page',
-			'params' => ['id'],
-		]]);
+		$pluginManager->addSetup(
+			'?->addComponent(?)',
+			[
+				'@self',
+				[
+					'key' => 'staticPageDefault',
+					'name' => 'static-page-default',
+					'implements' => StaticPagePlugin::class,
+					'componentClass' => VueComponent::class,
+					'view' => 'default',
+					'source' => __DIR__ . '/../template/default.js',
+				],
+			],
+		);
+		$pluginManager->addSetup(
+			'?->addComponent(?)',
+			[
+				'@self',
+				[
+					'key' => 'staticPageDetail',
+					'name' => 'static-page-detail',
+					'implements' => StaticPagePlugin::class,
+					'componentClass' => VueComponent::class,
+					'view' => 'detail',
+					'source' => __DIR__ . '/../template/detail.js',
+					'position' => 100,
+					'tab' => 'Static page',
+					'params' => ['id'],
+				],
+			],
+		);
 	}
 }
