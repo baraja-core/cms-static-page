@@ -1,6 +1,6 @@
 Vue.component('static-page-detail', {
 	props: ['id'],
-	template: `<div>
+	template: `<cms-card>
 	<b-overlay :show="isLoading">
 		<b-card>
 			<b-row>
@@ -13,7 +13,7 @@ Vue.component('static-page-detail', {
 					<b-row>
 						<b-col>
 							<b-form-group label="Parent">
-								<b-form-select  :options="options" v-model="form.parentId"></b-form-select>
+								<b-form-select :options="options" v-model="form.parentId"></b-form-select>
 							</b-form-group>
 						</b-col>
 						<b-col cols="2">
@@ -37,7 +37,7 @@ Vue.component('static-page-detail', {
 			</b-btn>
 		</b-card>
 	</b-overlay>
-</div>`,
+</cms-card>`,
 	data() {
 		return {
 			options: [],
