@@ -55,14 +55,14 @@ final class StaticPageExtension extends CompilerExtension
 			[
 				'@self',
 				[
-					'key' => 'staticPageDetail',
-					'name' => 'static-page-detail',
+					'key' => 'staticPageOverview',
+					'name' => 'static-page-overview',
 					'implements' => StaticPagePlugin::class,
 					'componentClass' => VueComponent::class,
 					'view' => 'detail',
-					'source' => __DIR__ . '/../template/detail.js',
+					'source' => __DIR__ . '/../template/overview.js',
 					'position' => 100,
-					'tab' => 'Static page',
+					'tab' => 'Overview',
 					'params' => ['id'],
 				],
 			],
