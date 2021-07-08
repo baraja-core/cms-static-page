@@ -15,43 +15,41 @@ use Nette\Utils\DateTime;
 use Nette\Utils\Strings;
 
 /**
- * @ORM\Entity()
- * @ORM\Table(name="core__static_page")
  * @method Translation getTitle(?string $locale = null)
  * @method void setTitle(string $title, ?string $locale = null)
  * @method Translation getContent(?string $locale = null)
  * @method void setContent(string $content, ?string $locale = null)
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'core__static_page')]
 class StaticPage
 {
 	use Identifier;
 	use TranslateObject;
 
-	/** @ORM\Column(type="translate") */
+	#[ORM\Column(type: 'translate')]
 	private Translation $title;
 
-	/** @ORM\Column(type="string", length=64, unique=true) */
+	#[ORM\Column(type: 'string', length: 64, unique: true)]
 	private string $slug;
 
-	/** @ORM\Column(type="translate") */
+	#[ORM\Column(type: 'translate')]
 	private Translation $content;
 
-	/** @ORM\Column(type="boolean") */
+	#[ORM\Column(type: 'boolean')]
 	private bool $active = true;
 
-	/** @ORM\Column(type="datetime") */
+	#[ORM\Column(type: 'datetime')]
 	private \DateTime $updatedDate;
 
-	/** @ORM\Column(type="datetime") */
+	#[ORM\Column(type: 'datetime')]
 	private \DateTime $insertedDate;
 
-	/** @ORM\ManyToOne(targetEntity="StaticPage", inversedBy="children") */
+	#[ORM\ManyToOne(targetEntity: StaticPage::class, inversedBy: 'children')]
 	private ?self $parent;
 
-	/**
-	 * @var self[]|Collection
-	 * @ORM\OneToMany(targetEntity="StaticPage", mappedBy="parent")
-	 */
+	/** @var self[]|Collection */
+	#[ORM\OneToMany(mappedBy: 'parent', targetEntity: StaticPage::class)]
 	private $children;
 
 
