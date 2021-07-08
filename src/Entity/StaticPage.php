@@ -45,11 +45,11 @@ class StaticPage
 	#[ORM\Column(type: 'datetime')]
 	private \DateTime $insertedDate;
 
-	#[ORM\ManyToOne(targetEntity: StaticPage::class, inversedBy: 'children')]
+	#[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
 	private ?self $parent;
 
 	/** @var self[]|Collection */
-	#[ORM\OneToMany(mappedBy: 'parent', targetEntity: StaticPage::class)]
+	#[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
 	private $children;
 
 
