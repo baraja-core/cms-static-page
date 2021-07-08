@@ -37,7 +37,7 @@ final class StaticPagePlugin extends BasePlugin
 
 	public function actionDetail(int $id): void
 	{
-		/** @var mixed[][] $staticPage */
+		/** @var array<int, array{id: int, title: string}> $staticPage */
 		$staticPage = $this->entityManager->getRepository(StaticPage::class)
 			->createQueryBuilder('staticPage')
 			->select('PARTIAL staticPage.{id, title}')
