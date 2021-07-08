@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Baraja\StaticPage\Entity;
 
 
-use Baraja\Doctrine\Identifier\Identifier;
+use Baraja\Doctrine\Identifier\IdentifierUnsigned;
 use Baraja\Localization\TranslateObject;
 use Baraja\Localization\Translation;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,7 +24,7 @@ use Nette\Utils\Strings;
 #[ORM\Table(name: 'core__static_page')]
 class StaticPage
 {
-	use Identifier;
+	use IdentifierUnsigned;
 	use TranslateObject;
 
 	#[ORM\Column(type: 'translate')]
