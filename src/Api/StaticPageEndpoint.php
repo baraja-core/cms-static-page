@@ -104,7 +104,7 @@ final class StaticPageEndpoint extends BaseEndpoint
 
 		$staticPage = new StaticPage($title, '', $slug, $parent);
 		$this->entityManager->persist($staticPage);
-		$this->entityManager->flush($staticPage);
+		$this->entityManager->flush();
 
 		$this->sendOk([
 			'id' => $staticPage->getId(),
@@ -162,7 +162,7 @@ final class StaticPageEndpoint extends BaseEndpoint
 		$staticPage->setTitle($title);
 		$staticPage->setContent($content);
 		$staticPage->setActive($active);
-		$this->entityManager->flush($staticPage);
+		$this->entityManager->flush();
 
 		$this->sendOk();
 	}
