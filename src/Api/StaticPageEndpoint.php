@@ -212,7 +212,9 @@ final class StaticPageEndpoint extends BaseEndpoint
 			);
 		}
 
-		$this->sendJson($this->formatBootstrapSelectArray($tree->process($items)));
+		$this->sendJson([
+			'tree' => $this->formatBootstrapSelectArray($tree->process($items)),
+		]);
 	}
 
 

@@ -73,7 +73,7 @@ Vue.component('static-page-default', {
 	methods: {
 		syncSelectbox() {
 			axiosApi.get('static-page/static-pages-as-tree').then(req => {
-				this.selectbox = [...req.data, {value: null, text: '--- root ---'}];
+				this.selectbox = [...req.data.tree, {value: null, text: '--- root ---'}];
 			});
 		},
 		sync() {

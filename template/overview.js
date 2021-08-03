@@ -62,7 +62,7 @@ Vue.component('static-page-detail', {
 			this.isLoading = true;
 			axiosApi.get('static-page/static-pages-as-tree')
 				.then(req => {
-					this.options = req.data.filter(item => item.value !== this.id);
+					this.options = req.data.tree.filter(item => item.value !== this.id);
 					this.options.push({
 						value: null,
 						text: '--- root page ---'
