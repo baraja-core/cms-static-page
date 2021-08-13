@@ -7,6 +7,7 @@ namespace Baraja\StaticPage;
 
 use Baraja\Doctrine\ORM\DI\OrmAnnotationsExtension;
 use Baraja\Plugin\Component\VueComponent;
+use Baraja\Plugin\PluginComponentExtension;
 use Baraja\Plugin\PluginManager;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\ServiceDefinition;
@@ -24,7 +25,7 @@ final class StaticPageExtension extends CompilerExtension
 
 	public function beforeCompile(): void
 	{
-		$builder = $this->getContainerBuilder();
+		PluginComponentExtension::defineBasicServices($builder = $this->getContainerBuilder());
 		OrmAnnotationsExtension::addAnnotationPathToManager(
 			$builder,
 			'Baraja\StaticPage\Entity',
